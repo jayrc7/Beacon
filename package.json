@@ -1,5 +1,6 @@
 {
   "name": "clickout",
+  "homepage": "https://jayrc7.github.io/sdhacks",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +9,7 @@
     "react-scripts": "2.0.4"
   },
   "scripts": {
+    "deploy": "npm run build&&gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
