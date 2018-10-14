@@ -12,8 +12,8 @@ class App extends Component {
 
           <h2> Meet Up with a Purpose. </h2>
 
-
-      </div>
+        </div>
+      
     );
   }
 }
