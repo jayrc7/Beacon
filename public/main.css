@@ -1,7 +1,7 @@
 .dropbtn {
-    background-color: #3498DB;
+    background-color: #;
     color: white;
-    padding: 16px;
+    padding: 9px;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -36,3 +36,12 @@
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+.pinme {
+  background-color:#dd1d17;
+  margin: 0 auto;
+  width: 200px;
+  padding: 14px;
+  font-size: 23px;
+  
+}
