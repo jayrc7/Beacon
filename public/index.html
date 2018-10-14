@@ -151,9 +151,46 @@ window.onclick = function(event) {
 
             map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
+            refreshBeacons(map);
         }
 
+        function refreshBeacons(map) {
+          console.log("running");
+          var values;
+          var old_beacons;
+          var oldies = function(old_beacons) {
+            values = old_beacons;
+            refresh(values);
+          }
 
+
+          getOldJSON(oldies);
+
+
+          function getOldJSON(callback2) {
+            let req3 = new XMLHttpRequest();
+            req3['responseType'] = "text";
+            req3.open("GET", "https://api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c/latest", true);
+            req3.setRequestHeader("secret-key", "$2a$10$aXtCIwATAuWL.aDyqGE7T.H1wbu7giYVFtaPvtT6B/srWOafZgX1W");
+            req3.send();
+
+            req3.onreadystatechange = () => {
+              if (req3.readyState == XMLHttpRequest.DONE) {
+                old_beacons = req3.responseText;
+                callback2(old_beacons);
+              }
+            };
+          }
+
+          var refresh = function(data) {
+            data = JSON.parse(data);
+            count = data['beacons'].length;
+
+            for (var i = 0; i < count; i++) {
+              addDomMarker(map, data['beacons'][i].lat, data['beacons'][i].lon, data['beacons'][i].name, data['beacons'][i].email, data['beacons'][i].event, data['beacons'][i].category, data['beacons'][i].time, true);
+            }
+          }
+        }
 
         function setUpClickListener(map) {
         // Attach an event listener to map display
