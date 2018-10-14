@@ -96,6 +96,41 @@ window.onclick = function(event) {
 
             map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
+            refreshBeacons(map);
+        }
+
+        function refreshBeacons(map) {
+          console.log("running");
+          var values;
+          var old_beacons;
+          var oldies = function(old_beacons) {
+            values = old_beacons;
+            refresh(values);
+          }
+
+          getOldJSON(oldies);
+
+          function getOldJSON(callback2) {
+            let req3 = new XMLHttpRequest();
+            req3['responseType'] = "text";
+            req3.open("GET", "https://api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c/latest", true);
+            req3.setRequestHeader("secret-key", "$2a$10$aXtCIwATAuWL.aDyqGE7T.H1wbu7giYVFtaPvtT6B/srWOafZgX1W");
+            req3.send();
+            req3.onreadystatechange = () => {
+              if (req3.readyState == XMLHttpRequest.DONE) {
+                old_beacons = req3.responseText;
+                callback2(old_beacons);
+              }
+            };
+          }
+
+          var refresh = function(data) {
+            data = JSON.parse(data);
+            count = data['beacons'].length;
+            for (var i = 0; i < count; i++) {
+              addDomMarker(map, data['beacons'][i].lat, data['beacons'][i].lon, data['beacons'][i].name, data['beacons'][i].email, data['beacons'][i].event, data['beacons'][i].category, data['beacons'][i].time, true);
+            }
+          }
         }
 
 
@@ -110,7 +145,7 @@ window.onclick = function(event) {
         //((coord.lat > 0) ? 'N' : 'S') +
         //' ' + Math.abs(coord.lng.toFixed(4)) +
          //((coord.lng > 0) ? 'E' : 'W'));
-         addDomMarker(map, coord.lat.toFixed(4), coord.lng.toFixed(4));
+         addDomMarker(map, coord.lat.toFixed(4), coord.lng.toFixed(4), "", "", "", "", "", false);
 
 
 
@@ -118,7 +153,7 @@ window.onclick = function(event) {
 
         }
 
-        function addDomMarker(map, lati, lon, name, email, event, category, time) {
+        function addDomMarker(map, lati, lon, name, email, event, category, time, inJSON) {
             var outerElement = document.createElement('div'),
             innerElement = document.createElement('div');
 
@@ -171,6 +206,13 @@ window.onclick = function(event) {
             }
             });
 
+            if (inJSON) {
+              var newMarker = new H.map.DomMarker({lat:lati, lng:lon},{
+                icon: domIcon
+              });
+              map.addObject(newMarker);
+            } else {
+
             var name = document.getElementById("name").value;
             var event = document.getElementById("event").value;
 
@@ -191,10 +233,8 @@ window.onclick = function(event) {
 
             // //api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c
             // $2a$10$aXtCIwATAuWL.aDyqGE7T.H1wbu7giYVFtaPvtT6B/srWOafZgX1W
-
+            console.log("new marker");
             map.addObject(newMarker);
-
-            
 
             var val;
             var returned_json;
@@ -237,6 +277,7 @@ window.onclick = function(event) {
               }
             }
             }
+          }
 
 
 
