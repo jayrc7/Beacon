@@ -30,6 +30,7 @@
 
   <body onload="" style="margin: 40px">
     <div id="root"> </div>
+    
 
 
       <div id="userInput" style="margin-top: 150px; float: left; background-color: lightblue; height:400px; width: 23%">
@@ -42,10 +43,9 @@
           <input type = "text" id="event">
           <br><br>
           Event type: <br>
-          
+     
 </head>
 <body>
-
 
 <div class="dropdown">
 <button onclick="myFunction()" class="dropbtn">Dropdown</button>
@@ -153,7 +153,7 @@ window.onclick = function(event) {
 
         }
 
-        function addDomMarker(map, lati, lon, name, email, event, category, time, inJSON) {
+        function addDomMarker(map, lati, lon, name, email, event, category, time, inJSON, bool) {
             var outerElement = document.createElement('div'),
             innerElement = document.createElement('div');
 
@@ -188,6 +188,7 @@ window.onclick = function(event) {
                 evt.target.style.opacity = 0.6;
             };
 
+
             function changeOpacityToOne(evt) {
                 evt.target.style.opacity = 1;
             };
@@ -198,6 +199,7 @@ window.onclick = function(event) {
             onAttach: function(clonedElement, domIcon, domMarker) {
                 clonedElement.addEventListener('mouseover', changeOpacity);
                 clonedElement.addEventListener('mouseout', changeOpacityToOne);
+
             },
             // the function is called every time marker leaves the viewport
             onDetach: function(clonedElement, domIcon, domMarker) {
@@ -205,6 +207,8 @@ window.onclick = function(event) {
             clonedElement.removeEventListener('mouseout', changeOpacityToOne);
             }
             });
+
+
 
             if (inJSON) {
               var newMarker = new H.map.DomMarker({lat:lati, lng:lon},{
@@ -278,8 +282,9 @@ window.onclick = function(event) {
             }
             }
           }
+        
 
-
+        
 
         /**
         * Boilerplate map initialization code starts below:
