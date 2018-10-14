@@ -7,9 +7,9 @@ div.yes{
 
 
 .dropbtn {
-    background-color: #3498DB;
+    background-color: #;
     color: white;
-    padding: 16px;
+    padding: 9px;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -44,3 +44,15 @@ div.yes{
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+<<<<<<< HEAD
+=======
+
+.pinme {
+  background-color:#dd1d17;
+  margin: 0 auto;
+  width: 200px;
+  padding: 14px;
+  font-size: 23px;
+  
+}
+>>>>>>> 973090eb992b2fabc9f45b1550da4ff9584795e3
