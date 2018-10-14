@@ -97,26 +97,25 @@
         setUpClickListener(map);
         
         <script>
-        $.ajax({
-          url: "https://pos.api.here.com/positioning/v1/locate?app_id=hM6QGhSurmnxc8i69ynP&app_code=GoO9Ti5ehS-nrEQQcm-KGQ",
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("Content-Type=application/json")
-          },
-          type: 'POST',
-          dataType: 'json',
-          contentType: 'application/json',
-          processData: false,
-          data: '{"wcdma": [{"mcc": 262, "mnc": 7, "cid": 14674663, "nmr": [{ "uarfcndl": 10786, "psc": 149}, { "uarfcndl": 10762, "psc": 211}]}]}',
+          $.ajax({
+            url: "https://pos.api.here.com/positioning/v1/locate?app_id=hM6QGhSurmnxc8i69ynP&app_code=GoO9Ti5ehS-nrEQQcm-KGQ",
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader("Content-Type=application/json")
+            },
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            processData: false,
+            data: '{"wcdma": [{"mcc": 262, "mnc": 7, "cid": 14674663, "nmr": [{ "uarfcndl": 10786, "psc": 149}, { "uarfcndl": 10762, "psc": 211}]}]}',
 
-          success: function(data) {
-            console.log(data);
-            map.setCenter({lat:data.location.lat, lng:data.location.lng});
-          },
-          error: function() {
-            console.log("AHHH");
-          }
-          });
-      </script>
+            success: function(data) {
+              map.setCenter({lat:data.location.lat, lng:data.location.lng});
+            },
+            error: function() {
+              console.log("AHHH");
+            }
+            });
+          </script>
 
       </script>
 
