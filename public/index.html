@@ -67,9 +67,9 @@
 <div class="dropdown" style = "margin-left: 50px">
 <button type= "button" onmouseover="myFunction()" class="dropbtn" style= "background-color: #2A1ED2">Event Type</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="Hangout" id="hangout">Event</a>
-    <a href="Sport" id="sport">Event</a>
-    <a href="Event" id="event">Event</a>
+    <option value="Hangout" id="hangout">Event</option>
+    <option value="Sport" id="sport">Event</option>
+    <option value="Event" id="event">Event</option>
   </div>
   <br><br>
 </div>
@@ -94,13 +94,7 @@
         document.getElementById("timeCheck").style.opacity="1.0";
       }
 
-      alert("YES");
-      //Check dropdowns
-      if ( document.getElementById("hangout").value.length === 0) {
-        document.getElementById("dropCheck").style.opacity="1.0";
-      }
-      alert("NO");
-
+      // Check Dropouts
       if ( document.getElementById("hangout").value.length === 0) {
         document.getElementById("dropCheck").style.opacity="1.0";
       }
