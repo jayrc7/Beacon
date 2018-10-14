@@ -30,7 +30,8 @@
   <body>
     <div id="root"> </div>
     <div id="map" style="margin: 0 auto; position: relative;width: 60%; height: 800px; background: grey" />
-        <script  type="text/javascript" charset="UTF-8" >
+<div id="poop"></div>
+<script  type="text/javascript" charset="UTF-8" >
 
         /**
         * Moves the map to display over Berlin
@@ -38,9 +39,25 @@
         * @param  {H.Map} map      A HERE Map instance within the application
         */
         function moveMapToBerlin(map){
-            map.setCenter({lat:52.5159, lng:13.3777});
+                
+            map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
+            
         }
+
+        function setUpClickListener(map) {
+        // Attach an event listener to map display
+        // obtain the coordinates and display in an alert box.
+        map.addEventListener('tap', function (evt) {
+        var coord = map.screenToGeo(evt.currentPointer.viewportX,
+            evt.currentPointer.viewportY);
+        alert('Clicked at ' + Math.abs(coord.lat.toFixed(4)) +
+        ((coord.lat > 0) ? 'N' : 'S') +
+        ' ' + Math.abs(coord.lng.toFixed(4)) +
+         ((coord.lng > 0) ? 'E' : 'W'));
+        });
+        }
+        
 
 
 
@@ -76,6 +93,10 @@
 
         // Now use the map as required...
         moveMapToBerlin(map);
+
+        setUpClickListener(map);
+
+
       </script>
 
   </body>
