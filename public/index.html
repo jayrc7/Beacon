@@ -29,12 +29,12 @@
 
   </head>
 
-  <body onload="" style="margin: 40px">
+  <body onload="" style="margin: 40px; background: #6EC2C4;">
     <div id="root"> </div>
     
 
-    <div id=background style=" margin-top: 80px; margin-left: 100px; auto; float: left; background-color: #FFB451; height:460px; width: 23%; border-radius: 20px">
-      <div style="auto; float: left; margin-left: 10px; margin-top: 4px">
+    <div id=background style="position: relative; margin-top: 80px; margin-left: 0px; float: left; background-color: #D56F3E; height:460px; width: 23%; border-radius: 20px">
+      <div style="float: left; margin-left: 0px; margin-top: 4px">
         <br>
         <img id="nameCheck" src="http://www.collegeaisi.ge/uploads/images/009639-simple-red-glossy-icon-arrows-hand-clear-pointer-right.png" width="80" height="55" style="opacity: 0">
         <br><br>
@@ -48,7 +48,7 @@
 
     </div>
 
-      <div id="userInput" style=" font-size: 20px; margin-left: 110px; margin-top: 20px">
+      <div id="userInput" style=" font-size: 20px; margin-left: 40px; margin-top: 20px">
         <div id = "inputBoxes">
           <form>
           Name: <br>
@@ -66,15 +66,16 @@
             <br><br>
 
 
-<div class="dropdown" style = "margin-left: 50px">
-<button type= "button" onmouseover="myFunction()" class="dropbtn" style= "background-color: #2A1ED2">Event Type</button>
+<!-- <div class="dropdown" style = "position: relative; margin-left: 20px"> -->
+<!-- <button type= "button" onmouseover="myFunction()" class="dropbtn" style= "background-color: #2A1ED2">Event Type</button> -->
+  <!-- <select id="myDropdown" class="dropdown-content"> -->
   <select id="myDropdown" class="dropdown-content">
     <option value="Hangout" id="hangout">Hangout</option>
     <option value="Sport" id="sport">Sport</option>
     <option value="Event" id="event">Event</option>
   </select>
   <br><br>
-</div>
+<!-- </div> -->
 
 
 <!-- pin me button -->
@@ -107,6 +108,15 @@
         document.getElementById("dropCheck").style.opacity="1.0";
       }
     }
+
+    function unfill() {
+      document.getElementById("nameCheck").style.opacity="0";
+      document.getElementById("emailCheck").style.opacity="0";
+      document.getElementById("occasionCheck").style.opacity="0";
+      document.getElementById("timeCheck").style.opacity="0";
+      document.getElementById("dropCheck").style.opacity="0";
+      
+    }
   </script>
 </div>
 
@@ -115,9 +125,9 @@
 <script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+// function myFunction() {
+//     document.getElementById("myDropdown").classList.toggle("show");
+// }
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
@@ -138,7 +148,7 @@ window.onclick = function(event) {
 </div>
           </div>
         </div>
-    <div id="map" style=" float: right; padding-right: 100px; width: 60%; height: 600px" />
+    <div id="map" style="position: relative; float: right; padding-right: 50px; width: 60%; height: 600px" />
 
 <script  type="text/javascript" charset="UTF-8" >
 
@@ -176,6 +186,7 @@ window.onclick = function(event) {
 
             req3.onreadystatechange = () => {
               if (req3.readyState == XMLHttpRequest.DONE) {
+                console.log(req3.responseText);
                 old_beacons = req3.responseText;
                 callback2(old_beacons);
               }
@@ -185,9 +196,11 @@ window.onclick = function(event) {
           var refresh = function(data) {
             data = JSON.parse(data);
             count = data['beacons'].length;
-
+            console.log(count);
+            console.log("entering loop");
             for (var i = 0; i < count; i++) {
-              addDomMarker(map, data['beacons'][i].lat, data['beacons'][i].lon, data['beacons'][i].name, data['beacons'][i].email, data['beacons'][i].event, data['beacons'][i].category, data['beacons'][i].time, true);
+              console.log("looping");
+              addDomMarker(map, data['beacons'][i].lat, data['beacons'][i].lon, data['beacons'][i].name, data['beacons'][i].email, data['beacons'][i].occ, data['beacons'][i].time, true);
             }
           }
         }
@@ -211,7 +224,7 @@ window.onclick = function(event) {
         }
 
 
-        function addDomMarker(map, lati, lon, name, email, event, category, time, inJSON, bool) {
+        function addDomMarker(map, lati, lon, name, email, occ, time, inJSON) {
             var outerElement = document.createElement('div'),
             innerElement = document.createElement('div');
 
@@ -242,8 +255,13 @@ window.onclick = function(event) {
             // Add text to the DOM element
             innerElement.innerHTML = 'C';
 
+            function alertme() {
+              alert("AHH");
+            }
+
             function changeOpacity(evt) {
                 evt.target.style.opacity = 0.6;
+                alert(name + " is having an event at " + time + ".\n" + "Head over and check out the " + occ + ". Their email is " + email + ".");
             };
 
 
@@ -255,7 +273,7 @@ window.onclick = function(event) {
             var domIcon = new H.map.DomIcon(outerElement, {
             // the function is called every time marker enters the viewport
             onAttach: function(clonedElement, domIcon, domMarker) {
-                clonedElement.addEventListener('mouseover', changeOpacity);
+                clonedElement.addEventListener('mouseover', changeOpacity, alertme);
                 clonedElement.addEventListener('mouseout', changeOpacityToOne);
 
             },
@@ -277,17 +295,11 @@ window.onclick = function(event) {
 
 
             var name = document.getElementById("name").value;
-            var event = document.getElementById("event").value;
+            var email = document.getElementById("email").value;
+            var occ = document.getElementById("occasion").value;
+            var time = document.getElementById("time").value;
 
-            var name = name;
-            var event = event;
-            var occ = "";
-            var time = "";
-            var type = "";
-            var lat = lati;
-            var lon = lon;
-
-            if (name !== "" && event !== "") {
+            if (name !== "" && email !== "" && occ !== "" && time !== "") {
 
             var newMarker = new H.map.DomMarker({lat:lati, lng:lon},{
                 icon: domIcon
@@ -299,7 +311,7 @@ window.onclick = function(event) {
 
             map.addObject(newMarker);
 
-
+            unfill();
 
             var val;
             var returned_json;
@@ -333,7 +345,7 @@ window.onclick = function(event) {
                 };
 
               data = JSON.parse(data);
-              data['beacons'].push({"name": name, "email": email, "occasion": occ, "time": time, "type": type, "lat": lati, "lon": lon});
+              data['beacons'].push({"name": name, "email": email, "occ": occ, "time": time, "lat": lati, "lon": lon});
               data = JSON.stringify(data);
 
               req2.open("PUT", "https://api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c", true);
@@ -344,6 +356,7 @@ window.onclick = function(event) {
             }
 
           }
+        
         
         
 
@@ -381,26 +394,6 @@ window.onclick = function(event) {
         addDomMarker(map);
 
         </script>
-        <!-- <script>
-          $.ajax({
-            url: "https://pos.api.here.com/positioning/v1/locate?app_id=hM6QGhSurmnxc8i69ynP&app_code=GoO9Ti5ehS-nrEQQcm-KGQ",
-            beforeSend: function(xhr) {
-              xhr.setRequestHeader("Content-Type=application/json")
-            },
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            processData: false,
-            data: '{"wcdma": [{"mcc": 262, "mnc": 7, "cid": 14674663, "nmr": [{ "uarfcndl": 10786, "psc": 149}, { "uarfcndl": 10762, "psc": 211}]}]}',
-
-            success: function(data) {
-              map.setCenter({lat:data.location.lat, lng:data.location.lng});
-            },
-            error: function() {
-              console.log("AHHH");
-            }
-            });
-          </script> -->
 
 
   </body>
