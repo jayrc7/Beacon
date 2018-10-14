@@ -20,6 +20,7 @@
     -->
     <title>React App</title>
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
@@ -27,7 +28,7 @@
 
   </head>
 
-  <body onload="getLocation()" style="margin: 40px">
+  <body onload="" style="margin: 40px">
     <div id="root"> </div>
 
 
@@ -35,10 +36,10 @@
         <div id = "inputBoxes">
           <form>
           Name: <br>
-          <input type = "text" name ="name">
+          <input type = "text" id="name">
           <br><br>
           Event: <br>
-          <input type = "text" name = "event">
+          <input type = "text" id="event">
           <br><br>
           Event type: <br>
           
@@ -95,7 +96,6 @@ window.onclick = function(event) {
 
             map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
-
         }
 
 
@@ -110,7 +110,6 @@ window.onclick = function(event) {
         //((coord.lat > 0) ? 'N' : 'S') +
         //' ' + Math.abs(coord.lng.toFixed(4)) +
          //((coord.lng > 0) ? 'E' : 'W'));
-
          addDomMarker(map, coord.lat.toFixed(4), coord.lng.toFixed(4));
 
 
@@ -119,7 +118,7 @@ window.onclick = function(event) {
 
         }
 
-        function addDomMarker(map, lati, lon) {
+        function addDomMarker(map, lati, lon, name, email, event, category, time) {
             var outerElement = document.createElement('div'),
             innerElement = document.createElement('div');
 
@@ -172,11 +171,71 @@ window.onclick = function(event) {
             }
             });
 
+            var name = document.getElementById("name").value;
+            var event = document.getElementById("event").value;
+
+            var name = name;
+            var event = event;
+            var occ = "";
+            var time = "";
+            var type = "";
+            var lat = lati;
+            var lon = lon;
+
+            if (name !== "" && event !== "") {
+
             var newMarker = new H.map.DomMarker({lat:lati, lng:lon},{
                 icon: domIcon
             });
 
+
+            // //api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c
+            // $2a$10$aXtCIwATAuWL.aDyqGE7T.H1wbu7giYVFtaPvtT6B/srWOafZgX1W
+
             map.addObject(newMarker);
+
+            
+
+            var val;
+            var returned_json;
+            var jsonval = function(returned_json) {
+              val = returned_json;
+              update(val);
+            }
+
+            getJSON(jsonval);
+
+            function getJSON(callback) {
+              let req1 = new XMLHttpRequest();
+              req1['responseType'] = "text";
+              req1.open("GET", "https://api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c/latest", true);
+              req1.setRequestHeader("secret-key", "$2a$10$aXtCIwATAuWL.aDyqGE7T.H1wbu7giYVFtaPvtT6B/srWOafZgX1W");
+              req1.send();
+              req1.onreadystatechange = () => {
+                if (req1.readyState == XMLHttpRequest.DONE) {
+                  returned_json = req1.responseText;
+                  callback(returned_json);
+                }
+              };
+            }
+
+            var update = function(data) {
+              let req2 = new XMLHttpRequest();
+                req2.onreadystatechange = () => {
+                  if (req2.readyState == XMLHttpRequest.DONE) {
+                    console.log(req2.responseText);
+                  }
+                };
+
+              data = JSON.parse(data);
+              data['beacons'].push({"name": name, "email": email, "occasion": occ, "time": time, "type": type, "lat": lati, "lon": lon});              
+              data = JSON.stringify(data);
+
+              req2.open("PUT", "https://api.jsonbin.io/b/5bc2f24b716f9364f8c37e6c", true);
+              req2.setRequestHeader("Content-type", "application/json");
+              req2.send(data);
+              }
+            }
             }
 
 
@@ -215,9 +274,7 @@ window.onclick = function(event) {
         addDomMarker(map);
 
         </script>
-
-        </script>
-        <script>
+        <!-- <script>
           $.ajax({
             url: "https://pos.api.here.com/positioning/v1/locate?app_id=hM6QGhSurmnxc8i69ynP&app_code=GoO9Ti5ehS-nrEQQcm-KGQ",
             beforeSend: function(xhr) {
@@ -236,7 +293,7 @@ window.onclick = function(event) {
               console.log("AHHH");
             }
             });
-          </script>
+          </script> -->
 
 
   </body>
