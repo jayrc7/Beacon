@@ -29,7 +29,7 @@
 
   <body onload="getLocation()">
     <div id="root"> </div>
-    <div id="map" style="margin: 0 auto; position: relative;width: 60%; height: 800px; background: grey" />
+    <div id="map" style=" position: relative; left: 475px; width: 75%; height: 800px; background: grey" />
 <script  type="text/javascript" charset="UTF-8" >
 
         /**
@@ -38,10 +38,10 @@
         * @param  {H.Map} map      A HERE Map instance within the application
         */
         function moveMapToBerlin(map){
-                
+
             map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
-            
+
         }
 
 
@@ -56,13 +56,14 @@
         //((coord.lat > 0) ? 'N' : 'S') +
         //' ' + Math.abs(coord.lng.toFixed(4)) +
          //((coord.lng > 0) ? 'E' : 'W'));
-        addDomMarker(map, coord.lat.toFixed(4), coord.lng.toFixed(4));
 
-
+         addDomMarker(map, coord.lat.toFixed(4), coord.lng.toFixed(4));
+           
+          
+          
         });
 
         }
-        
 
         function addDomMarker(map, lati, lon) {
             var outerElement = document.createElement('div'),
@@ -122,7 +123,6 @@
             });
 
             map.addObject(newMarker);
-
             }
 
 
@@ -161,6 +161,8 @@
         addDomMarker(map);
 
         </script> 
+    
+        </script>
         <script>
           $.ajax({
             url: "https://pos.api.here.com/positioning/v1/locate?app_id=hM6QGhSurmnxc8i69ynP&app_code=GoO9Ti5ehS-nrEQQcm-KGQ",
