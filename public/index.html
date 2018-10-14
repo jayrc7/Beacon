@@ -29,8 +29,8 @@
 
   <body onload="getLocation()">
     <div id="root"> </div>
-    <div id="map" style="margin: 0 auto; position: relative;width: 60%; height: 800px; background: grey" />
-<div id="poop"></div>
+    <div id="map" style=" position: relative; left: 760px; width: 60%; height: 800px; background: grey" />
+<div id="userInput"></div>
 <script  type="text/javascript" charset="UTF-8" >
 
         /**
@@ -39,10 +39,10 @@
         * @param  {H.Map} map      A HERE Map instance within the application
         */
         function moveMapToBerlin(map){
-                
+
             map.setCenter({lat:32.8801, lng:-117.2340});
             map.setZoom(14);
-            
+
         }
 
         function setUpClickListener(map) {
@@ -57,7 +57,7 @@
          ((coord.lng > 0) ? 'E' : 'W'));
         });
         }
-        
+
 
 
 
