@@ -4,4 +4,6 @@ The way it works is a user can write information regarding the event they'd like
 
 Created with Javascript, HTML, CSS, and Here mapping API.
 
+Find our product at https://jayrc7.github.io/Beacon
+
 
