@@ -1,3 +1,11 @@
+h1.title{
+    text-align: center;
+}
+
+h2.subtitle{
+    text-align: center;
+}
+
 div.yes{
     background-color: green;
     z-index: 100;

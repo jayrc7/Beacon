@@ -6,12 +6,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <h1>
-             Beacon
-          </h1>
-
-          <h2> Meet Up with a Purpose. </h2>
-
         </div>
       
     );
