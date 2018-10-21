@@ -1,14 +1,14 @@
 {
   "main.css": "/beacon/static/css/main.20edbc45.chunk.css",
-  "main.js": "/beacon/static/js/main.c0ee54d3.chunk.js",
-  "main.js.map": "/beacon/static/js/main.c0ee54d3.chunk.js.map",
-  "static/js/1.7eae6140.chunk.js": "/beacon/static/js/1.7eae6140.chunk.js",
-  "static/js/1.7eae6140.chunk.js.map": "/beacon/static/js/1.7eae6140.chunk.js.map",
+  "main.js": "/beacon/static/js/main.01c68027.chunk.js",
+  "main.js.map": "/beacon/static/js/main.01c68027.chunk.js.map",
+  "static/js/1.4fd91c74.chunk.js": "/beacon/static/js/1.4fd91c74.chunk.js",
+  "static/js/1.4fd91c74.chunk.js.map": "/beacon/static/js/1.4fd91c74.chunk.js.map",
   "runtime~main.js": "/beacon/static/js/runtime~main.1e4cfe11.js",
   "runtime~main.js.map": "/beacon/static/js/runtime~main.1e4cfe11.js.map",
   "static/media/logo.svg": "/beacon/static/media/logo.5d5d9eef.svg",
   "static/css/main.20edbc45.chunk.css.map": "/beacon/static/css/main.20edbc45.chunk.css.map",
   "index.html": "/beacon/index.html",
-  "precache-manifest.c2eafc6a6d7bfd43a4ca36744caac74b.js": "/beacon/precache-manifest.c2eafc6a6d7bfd43a4ca36744caac74b.js",
+  "precache-manifest.78010055afac2ed4efddc4118b199915.js": "/beacon/precache-manifest.78010055afac2ed4efddc4118b199915.js",
   "service-worker.js": "/beacon/service-worker.js"
 }
