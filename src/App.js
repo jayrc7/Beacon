@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <Location />
-        <Map app_id = "hM6QGhSurmnxc8i69ynP" app_code="GoO9Ti5ehS-nrEQQcm-KGQ" />
+        <Map app_id = "hM6QGhSurmnxc8i69ynP" app_code="GoO9Ti5ehS-nrEQQcm-KGQ" useHTTPS="true" />
         </div>
       
     );
